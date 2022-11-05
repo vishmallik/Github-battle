@@ -12,7 +12,14 @@ export default function Repos(props) {
     return (
       <ul className="repos">
         {data.map((item, index) => {
-          return <SingleRepo item={item} key={item.id} index={index} />;
+          return (
+            <SingleRepo
+              item={item}
+              key={item.id}
+              index={index}
+              darkMode={props.darkMode}
+            />
+          );
         })}
       </ul>
     );
@@ -23,7 +30,7 @@ function SingleRepo(props) {
   let { open_issues_count, owner, html_url, watchers, forks_count } =
     props.item;
   return (
-    <li>
+    <li className={props.darkMode ? "dark-card" : ""}>
       <h4>#{props.index + 1}</h4>
       <img src={owner.avatar_url} alt={owner.login} />
       <a href={html_url}>{owner.login}</a>
@@ -31,7 +38,11 @@ function SingleRepo(props) {
         <div>
           <i className="fa-solid fa-user"></i>
           <span>
-            <a href={owner.html_url} style={{ display: "inline-block" }}>
+            <a
+              href={owner.html_url}
+              style={{ display: "inline-block" }}
+              className={props.darkMode ? "darkmode-text" : ""}
+            >
               {owner.login}
             </a>
           </span>

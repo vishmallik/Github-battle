@@ -1,30 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
 
-export default function Battle() {
+export default function Battle(props) {
   return (
     <>
-      <div className="container">
-        <Header />
-        <h1>Instructions</h1>
-        <div className="flex battle">
-          <div className="flex-33">
-            <h3>Enter Two Github user</h3>
-            <i className="fa-solid fa-users"></i>
-          </div>
-          <div className="flex-33">
-            <h3>Battle</h3>
-            <i className="fa-solid fa-plane"></i>
-          </div>
-          <div className="flex-33">
-            <h3>See the Winner</h3>
-            <i className="fa-solid fa-trophy"></i>
-          </div>
+      <h1>Instructions</h1>
+      <div className="flex battle">
+        <div className="flex-33">
+          <h3>Enter Two Github user</h3>
+          <i
+            className={`fa-solid fa-users ${props.darkMode ? "dark-card" : ""}`}
+          ></i>
         </div>
-        <h1>Players</h1>
-        <Players />
+        <div className="flex-33">
+          <h3>Battle</h3>
+          <i
+            className={`fa-solid fa-plane ${props.darkMode ? "dark-card" : ""}`}
+          ></i>
+        </div>
+        <div className="flex-33">
+          <h3>See the Winner</h3>
+          <i
+            className={`fa-solid fa-trophy ${
+              props.darkMode ? "dark-card" : ""
+            }`}
+          ></i>
+        </div>
       </div>
+      <h1>Players</h1>
+      <Players darkMode={props.darkMode} />
     </>
   );
 }
@@ -96,11 +100,12 @@ class Players extends React.Component {
                 data={user1_data}
                 handleDelete={this.handleDelete}
                 user="user1"
+                darkMode={this.props.darkMode}
               />
             ) : (
               <form
                 action=""
-                className="form-control"
+                className={`form-control ${this.props.darkMode ? "dark" : ""}`}
                 onSubmit={(event) => this.handleSubmit(event, 1)}
               >
                 <input
@@ -122,6 +127,7 @@ class Players extends React.Component {
                 data={user2_data}
                 handleDelete={this.handleDelete}
                 user="user2"
+                darkMode={this.props.darkMode}
               />
             ) : (
               <form
@@ -158,7 +164,7 @@ class Players extends React.Component {
 
 function UserInfo(props) {
   return (
-    <div className="flex user">
+    <div className={`flex user ${props.darkMode ? "dark-card" : ""}`}>
       <img src={props.data.avatar_url} alt={props.data.login} />
       {props.data.message ? <p>User not Found!</p> : <p>{props.data.login}</p>}
       <i

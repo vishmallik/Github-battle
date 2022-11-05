@@ -2,7 +2,7 @@ import React from "react";
 import Repos from "./Repos";
 let languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
 
-export default class Tag extends React.Component {
+export default class Popular extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +40,7 @@ export default class Tag extends React.Component {
             );
           })}
         </ul>
-        <Repos data={this.state.data} />
+        <Repos data={this.state.data} darkMode={this.props.darkMode} />
       </>
     );
   }

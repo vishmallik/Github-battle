@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
 
 export default class Result extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       player1: null,
       player2: null,
@@ -55,24 +54,29 @@ export default class Result extends React.Component {
     let { player1, player2 } = this.state;
     return (
       <>
-        <div className="container">
-          <Header />
-          {player1 && player2 ? (
-            <>
-              <div className="flex card-wrapper">
-                <UserCard player={player1} winner={this.state.winner} />
-                <UserCard player={player2} winner={this.state.winner} />
-              </div>
-              <Link to="/battle">
-                <button>RESET</button>
-              </Link>
-            </>
-          ) : (
-            <h2>
-              Battling<span className="loading"></span>
-            </h2>
-          )}
-        </div>
+        {player1 && player2 ? (
+          <>
+            <div className="flex card-wrapper">
+              <UserCard
+                player={player1}
+                winner={this.state.winner}
+                darkMode={this.props.darkMode}
+              />
+              <UserCard
+                player={player2}
+                winner={this.state.winner}
+                darkMode={this.props.darkMode}
+              />
+            </div>
+            <Link to="/battle">
+              <button className="reset">RESET</button>
+            </Link>
+          </>
+        ) : (
+          <h2>
+            Battling<span className="loading"></span>
+          </h2>
+        )}
       </>
     );
   }
@@ -82,7 +86,7 @@ function UserCard(props) {
   let { player } = props;
   let score = calculateScore(player);
   return (
-    <div className="card">
+    <div className={`card ${props.darkMode ? "dark-card" : ""}`}>
       <h2>{props.winner === player.login ? "Winner" : "Loser"}</h2>
       <img src={player.avatar_url} alt={player.login} />
       <p>Score: {score}</p>
