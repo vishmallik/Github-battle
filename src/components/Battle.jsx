@@ -45,7 +45,6 @@ class Players extends React.Component {
   }
   handleChange = (event, player) => {
     let user = "user" + player;
-    console.log(event.target.value);
     this.setState({
       [user]: event.target.value,
     });
@@ -54,8 +53,6 @@ class Players extends React.Component {
   handleSubmit = (event, player) => {
     event.preventDefault();
     let user = "user" + player;
-    console.dir(event.target[user]);
-    console.log(user);
     this.setState({
       [user]: event.target[user].value,
     });
